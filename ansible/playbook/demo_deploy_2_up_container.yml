@@ -1,0 +1,12 @@
+---
+-   hosts: all
+    vars:
+        dest_path: /home/mdaas_manager
+    gather_facts: no
+    become: yes
+    tasks:
+    -   name: up container
+        become: yes
+        shell: /usr/local/bin/docker-compose up -d
+        args:
+            chdir: "{{dest_path}}"

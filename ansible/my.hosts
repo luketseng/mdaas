@@ -1,0 +1,7 @@
+[WYMX]
+10.49.30.152
+
+[WYMX:vars]
+ansible_ssh_user=root
+ansible_ssh_pass=azuremte
+ansible_become_pass=azuremte

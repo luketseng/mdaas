@@ -1,0 +1,40 @@
+---
+-   hosts: all
+    vars:
+        src_path: /root/chyang/MDaaS
+        dest_path: /home/mdaas_manager
+        img_name: mdaas_manager.tar.xz
+    gather_facts: no
+    become: yes
+    tasks:
+    -   name: MDaaS Variable Basic Usage
+        debug: 
+          msg: "{{ src_path }}::{{ dest_path }}"
+    - name: Create a directory if it does not exist
+      file:
+        path: "{{ dest_path }}"
+        state: directory
+        mode: '0755'
+    -   name: Copy mdaas_mamager docker image.tar.xz
+        become: yes
+        copy:
+            src: "{{ src_path }}/{{ img_name }}"
+            dest: "{{ dest_path }}/{{ img_name }}"
+            backup: yes
+    -   name: Docker load image 
+        become: yes
+        shell: "xz -d -k < {{ img_name }} | docker load"
+        args:
+            chdir: "{{ dest_path }}"
+    -   name: Copy docker-compose.yml 
+        become: yes
+        copy:
+            src: ../../server_env/docker-compose.yml
+            dest: "{{ dest_path }}/docker-compose.yml"
+            backup: yes
+    -   name: Copy env.conf
+        become: yes
+        copy:
+            src: ../../server/config/env.conf
+            dest: "{{ dest_path }}/env.conf"
+            backup: yes

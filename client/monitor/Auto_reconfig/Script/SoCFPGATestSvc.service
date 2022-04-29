@@ -1,0 +1,13 @@
+[Unit]
+Description="STOS FPGA Test Service"
+After=network.target syslog.service
+startLimitIntervalSec=0
+[Service]
+Type=oneshot
+User=root
+ExecStartPre=/bin/sleep 15
+ExecStart=python3 /vol/data/persistent/tests/fpga.py
+StandardOutput=journal+console
+standardError=journal+console
+[Install]
+WantedBy=multi-user.target

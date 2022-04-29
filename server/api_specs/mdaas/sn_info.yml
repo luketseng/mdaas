@@ -1,0 +1,28 @@
+Get SN information
+---
+tags:
+  - MDaaS
+consumes:
+  - application/json
+produces:
+  - application/json
+parameters:
+  - in: body
+    name: body
+    description: 
+    required: true
+    schema:
+      properties:
+        ip: 
+          type: string
+          required: true
+          example: '192.168.10.16'
+        sn: 
+          type: string
+          required: true
+          example: 'BZA044001A1M01A'
+responses:
+  200:
+    description: OK
+  400:
+    description: 'Something wrong'

@@ -1,0 +1,16 @@
+version: '3.1'
+
+services:
+  mdaas_manager:
+    container_name: mdaas_manager
+    restart: always
+    image: mdaas_manager:2021.1.26
+    ports:
+      - "9796:9796"
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /home/mdaas_manager/env.conf:/root/server/config/env.config
+      - /opt/logs:/root/server/output
+      # - /root/chyang/MDaaS/server/config/env.conf:/root/server/config/env.conf
+
+# docker run --restart=always -d -p 9796:9796 --name mdaas_manager -v /etc/localtime:/etc/localtime:ro -v /home/mdaas_manager/env.conf:/root/server/config/env.config -v /opt/logs:/root/server/output mdaas_manager:2021.1.26
